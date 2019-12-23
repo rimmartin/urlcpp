@@ -1,4 +1,5 @@
-#include <boost/test/unit_test.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "doctest.h"
 #include <iostream>
 #include "Url.h"
 
@@ -131,7 +132,7 @@ void test_not_eq(const string& u1, const string& u2)
 } // end anon ns
 
 
-BOOST_AUTO_TEST_CASE(Url_test_parsing)
+TEST_CASE("Url_test_parsing")
 {
     Url u;
     test_parsing(&u,"",        "",        "",        "",        "",        "",        "",        "", false, false, false);
@@ -149,7 +150,7 @@ BOOST_AUTO_TEST_CASE(Url_test_parsing)
 }
 
 
-BOOST_AUTO_TEST_CASE(Url_test_compare)
+TEST_CASE("Url_test_compare")
 {
     test_eq("","");
     test_eq("/a/../b/","/b/");

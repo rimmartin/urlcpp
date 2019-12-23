@@ -1,0 +1,12 @@
+{
+  "name": "urlcpp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rimmartin/urlcpp.git",
+  "author": "<mathmldashx@yahoo.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "doctest": "onqtam/doctest"
+  }
+}

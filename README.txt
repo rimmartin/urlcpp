@@ -3,7 +3,7 @@ C++ url library with python module support
 
 Depends on
 ----------
-boost::regex
+std::regex
 
 
 
@@ -11,3 +11,5 @@ Build and test
 --------------
 
 $ make
+
+switching python support via cython

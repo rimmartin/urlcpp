@@ -44,7 +44,7 @@
 
 #include <string>
 #include <stdexcept>
-#include <boost/regex.hpp>
+#include <regex>
 
 #include "Path.h"
 

@@ -6,12 +6,12 @@
  * code package.
  */
 #include "Url.h"
-#include <boost/algorithm/string.hpp>
+#include <algorithm>
+#include <cassert>
 #include <sstream>
 
 
 using namespace std;
-using namespace boost;
 using namespace url::utils;
 
 
@@ -26,7 +26,7 @@ const char* scheme_defport[] = {
 };
 
 
-const boost::regex url_re(url_regex[RE_URL],regex_constants::perl);
+const std::regex url_re(url_regex[RE_URL]);
 
 char xdigit_to_num(char c) throw(std::logic_error)
 {
@@ -108,7 +108,7 @@ void Url::assign(const string& s)
     };
 
     try {
-        smatch match;
+        std::smatch match;
         if( regex_match(s, match, url_re) ) {
             /* bad cases:
              * ////rrara
@@ -373,7 +373,8 @@ ostream& operator<<(ostream& os, const Url& u) {
 }
 
 void Url::normalize_scheme()  {
-    to_lower(m_scheme);
+    std::transform(m_scheme.begin(), m_scheme.end(), m_scheme.begin(),
+                   [](unsigned char c) -> unsigned char { return std::tolower(c); });
 }
 
 
@@ -427,10 +428,11 @@ void Url::normalize()
 void Url::scheme(const string& s)
 {
     try {
-        regex re(url_regex[RE_SCHEME]);
-        if( regex_match(s,re) ) {
+        std::regex re(url_regex[RE_SCHEME]);
+        if( std::regex_match(s,re) ) {
             m_scheme = s;
-            to_lower(m_scheme);
+            std::transform(m_scheme.begin(), m_scheme.end(), m_scheme.begin(),
+                   [](unsigned char c) -> unsigned char { return std::tolower(c); });
             //if( m_scheme == "file" )
             //    authority("/");
             m_has_authority = true;
@@ -571,7 +573,7 @@ void Url::port(const string& s)
         if( s.empty() ) {
             m_port.clear();
         } else {
-            regex re(url_regex[RE_PORT]);
+            std::regex re(url_regex[RE_PORT]);
             if( ! regex_match(s,re) )
                 throw UrlParseError("Url::port("+s+"): Invalid port: regex didn't match");
             int port;
