@@ -10,6 +10,7 @@ std::regex
 Build and test
 --------------
 
+$ yarn install
 $ make
 
 switching python support via cython
