@@ -28,7 +28,7 @@ const char* scheme_defport[] = {
 
 const std::regex url_re(url_regex[RE_URL]);
 
-char xdigit_to_num(char c) throw(std::logic_error)
+char xdigit_to_num(char c)
 {
     if( ! isxdigit(c) )
         throw std::logic_error("not an hex digit");
@@ -36,14 +36,14 @@ char xdigit_to_num(char c) throw(std::logic_error)
 }
 
 
-char x2digits_to_num(char c1, char c2) throw(std::logic_error)
+char x2digits_to_num(char c1, char c2)
 {
     if( ! isxdigit(c1) || ! isxdigit(c2) )
         throw std::logic_error("not an hex digit");
     return((xdigit_to_num(c1) << 4) + xdigit_to_num(c2));
 }
 
-char digit_to_xnum(char c) throw(std::logic_error)
+char digit_to_xnum(char c)
 {
     if( c >= 0 && c <= 15 )
         return ("0123456789ABCDEF"[(int)c]);
@@ -153,7 +153,7 @@ void Url::assign(const string& s)
         } else {
             throw UrlParseError("Url doesn't match primary url regex");
         }
-    } catch(regex_error re) {
+    } catch(regex_error& re) {
         string s("Url::assign() boost::regex_error: ");
         s+=re.what();
         throw UrlParseError(s);
@@ -438,9 +438,9 @@ void Url::scheme(const string& s)
             m_has_authority = true;
         } else
             throw UrlParseError("scheme: " + s + " doesn't match scheme validation regex");
-    } catch(regex_error re) {
+    } catch(regex_error& re) {
         throw UrlParseError("Url::scheme("+s+"): boost::regex_error: " + re.what());
-    } catch(UrlParseError e) {
+    } catch(UrlParseError& e) {
         throw;
     } catch(...) {
         throw UrlParseError("Url::scheme("+s+"): throwed an unknown exception");
