@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/rimmartin/urlcpp.git",
-  "author": "<mathmldashx@yahoo.com>",
+  "author": "rimmartin",
   "license": "MIT",
   "private": false,
   "devDependencies": {
