@@ -146,6 +146,7 @@ TEST_CASE("Url_test_parsing")
     test_parsing(&u,"ftp://%32o@f%33oo.com:69/bar/b.html?q=r#nn",        "ftp",        "%32o",        "f%33oo.com",        "69",        "/bar/b.html",        "?q=r",        "#nn", true, true, true);
     test_parsing(&u,"ftp://%32o@f%33oo.com:69/%2Fbar/b.html?q=r+b#nn",        "ftp",        "%32o",        "f%33oo.com",        "69",        "/%2Fbar/b.html",        "?q=r+b",        "#nn", true, true, true);
     test_parsing(&u,"http://[fe80::202:3fff:feb7:e652]/rabo/mo?q=a#f",        "http",        "",        "fe80::202:3fff:feb7:e652",        "",        "/rabo/mo",        "?q=a",        "#f", true, true, true);
+    test_parsing(&u,"https://[fe80::202:3fff:feb7:e652]/rabo/mo?q=a#f",        "https",        "",        "fe80::202:3fff:feb7:e652",        "",        "/rabo/mo",        "?q=a",        "#f", true, true, true);
 
 }
 
@@ -167,6 +168,9 @@ TEST_CASE("Url_test_compare")
     test_eq("http://domo.com/a/../b","http://domo.com/b");
     test_eq("http://domo.com/a/../b/","http://domo.com/b/");
     test_eq("http://note@domo.com/a/../b/","http://note@domo.com/b/");
+    test_eq("https://domo.com/a/../b","https://domo.com/b");
+    test_eq("https://domo.com/a/../b/","https://domo.com/b/");
+    test_eq("https://note@domo.com/a/../b/","https://note@domo.com/b/");
 
     test_not_eq("","?");
     test_not_eq("","#");

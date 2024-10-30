@@ -637,7 +637,7 @@ void Url::set_def_port()
     using namespace utils;
     if( ! m_scheme.empty() )
     {
-        if( scheme() == "http")
+        if( scheme() == "http" || scheme() == "https")
             port(scheme_defport[SCHEME_HTTP]);
         else if ( scheme() == "ftp")
             port(scheme_defport[SCHEME_FTP]);
